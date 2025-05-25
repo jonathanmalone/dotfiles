@@ -32,4 +32,4 @@ else
     VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | grep Volume | awk '{print $5}'); 
 fi
 
-dunstify -a "Volume" -u normal -i $ICON "Volume: $VOL" -t 1000 -h string:bgcolor:#000000 -h string:fgcolor:#ff10f0 -h string:frcolor:#000000
+dunstify -a "Volume" -u normal -i $ICON "Volume: $VOL" -t 1000 -h string:bgcolor:#000000 -h string:fgcolor:#a91fff -h string:frcolor:#000000
