@@ -8,9 +8,6 @@ static const unsigned int gappx     = 12;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
-static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
-static const char *altbarcmd        = "$HOME/bar.sh"; /* Alternate bar launch command */
 static const char *fonts[]          = { "Liberation Mono:size=12" };
 static const char dmenufont[]       = "Liberation Mono:size=12";
 static const char col_gray1[]       = "#222222";
@@ -79,7 +76,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "20", "-fn", dmenufont, "-nb", col_black, "-nf", col_pink, "-sb", col_pink, "-sf", col_black, NULL };
 //static const char *roficmd[] = { "rofi", "-show", "run", "-m", "-4", NULL }; // Add this line
 static const char *termcmd[]  = { "st", NULL };
-static const char *lockcmd[]  = { "i3lock", "-i", "/home/tyler/.config/backgrounds/space-4.jpg", NULL };
+static const char *lockcmd[]  = { "i3lock", "-c", "000000", NULL };
 static const char *volup[] = { "set-volume", "+5%", NULL };
 static const char *voldown[] = { "set-volume", "-5%", NULL };
 static const char *mute[] = { "set-volume", "toggle", NULL };
