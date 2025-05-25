@@ -83,6 +83,7 @@ static const char *lockcmd[]  = { "i3lock", "-i", "/home/tyler/.config/backgroun
 static const char *volup[] = { "set-volume", "+5%", NULL };
 static const char *voldown[] = { "set-volume", "-5%", NULL };
 static const char *mute[] = { "set-volume", "toggle", NULL };
+static const char *flameshotcmd[] = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -126,7 +127,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ 0, 							XF86XK_AudioRaiseVolume, spawn, {.v = volup } },
 	{ 0, 							XF86XK_AudioLowerVolume, spawn, {.v = voldown } },
-	{ 0, 							XF86XK_AudioMute, spawn, {.v = mute } }
+	{ 0, 							XF86XK_AudioMute, spawn, {.v = mute } },
+    { 0,                            XK_Print,         spawn, {.v = flameshotcmd } }
 };
 
 /* button definitions */
