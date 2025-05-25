@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Get the current volume (example using amixer)
+
+PACTL_CMD=set-sink-volume
+CHANGE=$1
+ICON=audio-volume-high
+INITIALLY_MUTED=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+
+# we have to 1st check the value of $CHANGE so that 
+# we can structure the pactl command correctly...
+if [ "$CHANGE" = "toggle" ]; then
+    PACTL_CMD=set-sink-mute
+    CHANGE=toggle
+elif [ "$CHANGE" = "+5%" ] &&  [ "$INITIALLY_MUTED" = "yes" ]; then
+    # if we're currently muted and press volume up, unmute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+fi
+
+pactl $PACTL_CMD @DEFAULT_SINK@ $CHANGE
+
+# we want to get/display the current volume value
+# only AFTER we've changed it with the pactl
+# command above...
+# unfortunately, I can't figure out a way to tell if 
+# we should display a mute/unmute string except by
+# checking the value of $CHANGE again...
+if [ "$CHANGE" = "toggle" ]; then
+    VOL=Muted
+    ICON=audio-volume-muted
+else
+    VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | grep Volume | awk '{print $5}'); 
+fi
+
+dunstify -a "Volume" -u normal -i $ICON "Volume: $VOL" -t 1000 -h string:bgcolor:#000000 -h string:fgcolor:#ff10f0 -h string:frcolor:#000000
