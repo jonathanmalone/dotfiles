@@ -32,6 +32,10 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
+    "slstatus", NULL,
+    "feh", "--bg-scale", "/home/tyler/.config/backgrounds/space-4.jpg", NULL,
+    "dunst", NULL,
+    "picom", NULL,
 	NULL /* terminate */
 };
 
