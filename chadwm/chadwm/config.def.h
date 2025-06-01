@@ -40,7 +40,7 @@ static const int new_window_attach_on_end = 0; /*  1 means the new window will a
 static const char *fonts[]          = {"Iosevka:style:medium:size=12" ,"JetBrainsMono Nerd Font Mono:style:medium:size=19" };
 
 // theme
-#include "themes/onedark.h"
+#include "themes/catppuccin.h"
 
 static const char *colors[][3]      = {
     /*                     fg       bg      border */
@@ -86,7 +86,8 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class      instance    title       tags mask     iscentered   isfloating   monitor */
-    { "Gimp",     NULL,       NULL,       0,            1,           0 },
+    { "firefox", "Toolkit", "Picture-in-Picture",  1 << 0,       1,           0,        3514,-40,964,550,        1 },
+
 };
 
 /* layout(s) */
@@ -221,6 +222,9 @@ static const Key keys[] = {
 
     // kill dwm
     { MODKEY|ShiftMask,                 XK_e,       spawn,       SHCMD("killall bar.sh chadwm") }, 
+
+    // sticky
+    { MODKEY,                           XK_s,       togglesticky,   {0} },
 
     // kill window
     { MODKEY|ShiftMask,                 XK_q,       killclient,     {0} },

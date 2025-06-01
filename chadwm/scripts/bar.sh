@@ -11,7 +11,8 @@ interval=0
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
 
-  printf "^c$green^ ^b$black^ "
+  #printf "^c$green^ ^b$black^ "
+  printf "^c$green^ ^b$black^  CPU"
   printf "^c$green^ ^b$grey^ $cpu_val"
 }
 
@@ -20,8 +21,8 @@ pkg_updates() {
   updates=$({ timeout 20 checkupdates 2>/dev/null || true; } | wc -l) # arch
   # updates=$({ timeout 20 aptitude search '~U' 2>/dev/null || true; } | wc -l)  # apt (ubuntu, debian etc)
 
-  if [ "$updates" = "0" ]; then
-    printf "  ^c$green^    Fully Updated"
+  if [ "$updates" = "0" ] || [ -z "$updates" ]; then
+    printf " "
   else
     printf "  ^c$red^    $updates"" updates"
   fi
@@ -31,12 +32,12 @@ mullvad() {
     CITY=$(curl https://am.i.mullvad.net/city 2>/dev/null)
     IP=$(curl https://am.i.mullvad.net/ip 2>/dev/null)
 
-    printf "^c$darkblue^^b$black^ Mullvad: "
-    printf "^c$blue^^b$grey^ $CITY $IP"
+    printf "^c$darkblue^^b$black^ VPN: "
+    printf "^c$blue^^b$grey^  $CITY $IP"
 }
 
 mem() {
-  printf "^c$blue^^b$black^  "
+  printf "^c$blue^^b$black^  MEM "
   printf "^c$blue^^b$grey^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
@@ -49,8 +50,7 @@ wlan() {
 
 
 clock() {
-	printf "^c$black^ ^b$green^ 󱑆 "
-	printf "^c$black^^b$green^ $(date '+%I:%M')  "
+	printf "^c$green^^b$black^  $(date '+%I:%M') "
 }
 
 while true; do
